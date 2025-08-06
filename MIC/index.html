@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0">
+    <meta name="title" content="Mochi Ice Cream | Home">
+    <meta name="description" content="Mochi Ice Cream is a miraculous match of magnificent mochi dough with marvelously mouthwatering ice cream. Find your favorite flavor and buy it here online!">
+    <title>MIC | Home</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/7171ae1460.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="Images/miclogo-72.png" sizes="72x72">
+    <script>
+    function myFunction() {
+      var x = document.getElementById("second");
+      var y = document.getElementById("first");
+      if (x.style.display = "none") {
+        x.style.display = "block";
+        y.style.display = "none";
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <nav>
+        <a href="index.html"><img src="Images/miclogo.png" alt="MIC logo" id="MIClogo"></a>
+        <ul>
+          <li><a href="#youtube" class="media" aria-label="youtube"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="#twitter" class="media" aria-label="twitter"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#instagram" class="media" aria-label="instagram"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#facebook" class="media" aria-label="facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="about.html">About MIC</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="cart.php">Cart <i class="fas fa-shopping-cart"></i></a></li>
+        </ul>
+        <div class="dropdown">
+          <button class="dropbtn">Shop&nbsp;<i class="fas fa-caret-down"></i></button>
+          <div class="dropdown-content">
+            <a href="mochi.php">Mochi Ice Cream</a>
+            <a href="vegan.php">Non-Dairy &#38; Vegan</a>
+            <a href="bits.php">Ice Cream with Mochi Bits</a>
+            <a href="season.php">Seasonal</a>
+          </div>
+        </div>
+      </nav>
+      <div id="contain">
+        <header>
+          <h1><span>Chewable<br>Ice Cream</span><br>Because It's Better</h1>
+        </header>
+        <div id="transform">
+          <img src="Images/sweet-mango.png" alt="sweet mango" id="sweetmango">
+        </div>
+        <div id="flavors">
+          <a href="mochi.php" id="findf">Find Flavors</a>
+        </div>
+      </div>
+      <hr>
+      <main>
+        <section id="explain">
+          <div id="first">
+            <img src="Images/closed-mochi.png" alt="closed mochi" id="closedmochi">
+            <h2>What is Mochi Ice Cream?</h2>
+            <button id="look" onclick="myFunction()">Look Inside</button>
+          </div>
+          <div id="second">
+            <h2>What is Mochi Ice Cream?</h2>
+            <img src="Images/open-mochi.png" alt="open mochi" id="openmochi">
+            <div id="cream">
+              <h3>Crafted Premium Ice Cream</h3>
+              <p>Inside the pillowy sweet Mochi exterior is milky melty premium ice cream. The result? A majestic marriage of mesmerizing flavors that’ll make you say, “Mmmmore!”</p>
+            </div>
+            <div id="dough">
+              <h3>Sweet Rice Dough</h3>
+              <p>Ever wonder what that melt-in-your mouth, chewy dough is? It’s called Mochi! MIC master mochi makers make sweet rice dough from the best ingredients to create a magnificent doughy exterior</p>
+            </div>
+            <a href="about.html" id="more">More About MIC</a>
+          </div>
+        </section>
+        <hr>
+        <section id="explore">
+          <h2>Irresistibly Indulgent<br><span>Find Us on Social</span></h2>
+          <a href="#social">Explore</a>
+          <img src="Images/closed-mochis.png" alt="closed mochis" id="closedmochis">
+        </section>
+      </main>
+      <footer>
+        <div id="flex-container">
+          <div class="xlinks">
+            <ul>
+              <li><a href="#retail">Become A Retailer</a></li>
+              <li><a href="#faqs">FAQs</a></li>
+              <li><a href="#privacy">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="xlinks" id="xlinks2">
+            <ul>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#press">Press</a></li>
+              <li><a href="#media">Media</a></li>
+            </ul>
+          </div>
+          <div id="title">
+            <a href="index.html"><img src="Images/miclogo2.png" alt="MIC logo2" id="MIClogo2"></a>
+          </div>
+          <div id="newsletter">
+            <p>Never Miss an Update</p>
+            <form id="newsform" action="mailto:amandapatschke@yahoo.com" method="post" enctype="text/plain">
+              <input type="email" placeholder="email address" name="email" maxlength="254" required>
+              <input type="submit" value="sign up" name="submit">
+            </form>
+          </div>
+        </div>
+        <p>Created by Amanda Patschke <i class="far fa-copyright"></i> 2019</p>
+      </footer>
+    </div>
+  </body>
+</html>

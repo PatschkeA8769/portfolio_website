@@ -1,0 +1,361 @@
+@charset "utf-8";
+* {
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+	position: relative;
+	font-family: "Helvetica", sans-serif;
+}
+@font-face {
+	font-family: "EB Garamond";
+	src: url(Fonts/EBGaramond-Regular.ttf);
+	font-weight: 400;
+}
+@font-face {
+	font-family: "EB Garamond";
+	src: url(Fonts/EBGaramond-SemiBold.ttf);
+	font-weight: 600;
+}
+body {
+	background-color: #000000;
+	background-image: url("Images/bonfire.jpg");
+	background-repeat: repeat-y;
+	background-position: center top;
+}
+#container {
+	max-width: 2000px;
+	margin: 0px 20px 40px 20px;
+}
+header {
+	background-color: #000000;
+	color: #eeeeee;
+	height: 250px;
+	width: 100%;
+}
+header div {
+	text-align: center;
+	width: 50%;
+	position: absolute;
+	top: 50%;
+	left: 40px;
+	transform: translate(0,-50%);
+	text-transform: uppercase;
+}
+header h1 { 
+	font-family: "EB Garamond", serif;
+	font-size: 4.5em;
+	font-weight: 600;
+	line-height: .8em;
+}
+header h2 {
+	font-family: "EB Garamond", serif;
+	font-size: 2em;
+	font-weight: 400;
+	letter-spacing: .2em;
+}
+header img {
+	float: right;
+}
+nav {
+	background-color: #222222;
+	height: 58px;
+	border-bottom: 2px solid #7F7F7F;
+}
+nav ul {
+	list-style-type: none;
+	text-align: center;
+}
+#active {
+	color: #E5C999;
+}
+nav ul li {
+	float: left;
+	font-size: 1.2em;
+	padding: 16px 20px 0px 40px;
+}
+nav ul a {
+	font-family: "Marcellus SC", serif;
+	color: #dddddd;
+	text-decoration: none;
+}
+nav ul a:hover, #active:hover {
+	color: #ffffff;
+}
+#login {
+	float: right;
+}
+#login li {
+	font-family: "Helvetica", sans-serif;
+	font-size: 1em;
+	color: #dddddd;
+	padding: 21px 40px 0px 0px;
+}
+.fas {
+	padding-right: 5px;
+}
+#login a {
+	font-family: "Helvetica", sans-serif;
+}
+#left {
+	width: 50%;
+	float: left;
+	background-color: rgba(0,0,0,.85);
+}
+main h2 {
+	font-family: "Marcellus SC", serif;
+	font-size: 1.9em;
+	color: #C6AD81;
+	padding: 30px 0px 30px 40px;
+	font-weight: 400;
+}
+#left p {
+	font-size: 1em;
+	color: #eeeeee;
+	padding: 0px 40px 15px 40px;
+	line-height: 1.3em;
+}
+#left p a {
+	text-decoration: none;
+	color: #C6AD81;
+}
+#left p a:active, #left p a:visited {
+	color: #E5C999;
+}
+#left figure img {
+	width: 100%;
+	padding: 20px 40px 20px 40px;
+}
+#left figure figcaption {
+	font-size: 1em;
+	color: #eeeeee;
+	padding: 0px 40px 0px 40px;
+}
+section h2 {
+	font-family: "Marcellus SC", serif;
+	font-size: 1.9em;
+	padding: 30px 0px 30px 40px;
+	color: #C6AD81;
+	font-weight: 400;
+}
+section a {
+	color: #C6AD81;
+}
+section a:active, section a:visited {
+	color: #E5C999;
+}
+iframe {
+	padding: 25px 40px 20px 40px;
+}
+details {
+	border: 2px solid #7F6F52;
+	margin: 5px 40px 40px 40px;
+}
+details summary {
+	font-family: "Marcellus SC", serif;
+	font-size: 1.9em;
+	color: #C6AD81;
+	padding: 30px 0px 30px 20px;
+}
+details ul {
+	font-size: 1em;
+	color: #eeeeee;
+	list-style-type: none;
+	padding: 0px 0px 40px 40px;
+	line-height: 1.3em;
+}
+#right {
+	width: 50%;
+	float: right;
+}
+aside {	
+	padding: 0px 40px 40px 40px;
+	background-color: rgba(0,0,0,.85);
+}
+aside table {
+	border: 2px solid #7F6F52;
+	width: 100%;
+	border-collapse: collapse;
+}
+aside table h2 {
+	font-family: "Marcellus SC", serif;
+	font-size: 1.9em;
+	padding: 30px 0px 10px 0px;
+	color: #C6AD81;
+	font-weight: 400;
+}
+aside table tr:nth-child(2) {
+	text-align: center;
+}
+aside table img {
+	padding-bottom: 20px;
+}
+aside table tr:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #7F6F52;
+}
+aside table th {
+	border-right: 2px solid #7F6F52;
+	text-align: left;
+}
+aside table th, aside table td {
+	font-size: 1em;
+	color: #eeeeee;
+	padding: 20px 40px 20px 40px;
+	line-height: 1.3em;
+}
+article {
+	background-color: rgba(20,18,17,0.85);
+	padding-bottom: 25px;
+}
+article h2 {
+	font-family: "Marcellus SC", serif;
+	font-size: 1.9em;
+	padding: 30px 0px 30px 40px;
+	color: #C6AD81;
+	font-weight: 400;
+}
+article p {
+	font-size: 1em;
+	color: #eeeeee;
+	padding: 0px 40px 15px 40px;
+	line-height: 1.3em;
+}
+article > ul {
+	font-size: 1em;
+	color: #eeeeee;
+	list-style-type: circle;
+	line-height: 1.3em;
+	padding: 0px 40px;
+}
+.hide-list {
+	list-style-type: none;
+}
+article ul li ul {
+	padding: 5px 0px 15px 15px;
+}
+article p a {
+	color: #C6AD81;
+	text-decoration: none;
+}
+article p a:active, article a:visited {
+	color: #E5975B;
+}
+article ul li ul {
+	list-style-type: square;
+}
+#other {
+	background-color: rgba(0,0,0,.85);
+	padding-bottom: 30px;
+}
+#other h2 {
+	font-family: "Marcellus SC", serif;
+	font-size: 1.9em;
+	padding: 30px 0px 30px 40px;
+	color: #C6AD81;
+	font-weight: 400;	
+}
+#other ul {
+	font-size: 1em;
+	list-style-type: none;
+	margin-left: 40px;
+}
+#other ul li a {
+	border-radius: 3px;
+	background-color: #383838;
+	text-decoration: none;
+	display: inline-block;
+	transition: 0.2s;
+	color: #eeeeee;
+	padding: 10px 15px;
+	margin-bottom: 10px;
+}
+#other ul li a:hover {
+    background-color: #474747; 
+    color: #ffffff;
+}
+footer {
+	clear: both;
+	height: 60px;
+	text-align: center;
+}
+footer p {
+	font-size: 1em;
+	color: #eeeeee;
+	padding-top: 40px;
+}
+/* register page */
+#login-main {
+	background-color: rgba(0,0,0,.85);
+}
+form {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-column-gap: 40px;
+	padding-left: 40px;
+	margin-right: 80px;
+}
+form label {
+	display: block;
+	font-size: 1em;
+	color: #eeeeee;
+	font-weight: bold;
+}
+form p {
+	display: block;
+	font-size: .9em;
+	color: #cccccc;
+	padding-top: 17px;
+}
+form input {
+	background-color: #383838;
+	font-size: 1em;
+	color: #eeeeee;
+	border: 1px solid #7F7F7F;
+	border-radius: 3px;
+	padding: 14px 16px;
+	width: 100%;
+	margin-top: 20px;
+}
+form input:focus  {
+	border-color: #999999;
+	outline: none;
+}
+form span {
+	display: block;
+	font-size: .9em;
+	color: #cccccc;
+	padding: 12px 0px 18px 0px;
+}
+form input[type=reset], form input[type=submit] {
+	border: none;
+	padding: 10px 15px;
+	margin: 10px 0px 50px 0px;
+	width: auto;
+	cursor: pointer;
+}
+form input[type=submit] {
+	float: right;
+}
+input[type="reset"]:hover, input[type="submit"]:hover {
+	background-color: #474747; 
+	color: #ffffff;
+}
+/* login page */
+form a {
+	background-color: #383838;
+	font-size: 1em;
+	color: #eeeeee;
+	border-radius: 3px;
+	border: none;
+	padding: 10px 15px;
+	margin: 10px 0px 50px 0px;
+	width: auto;
+	text-decoration: none;
+	display: inline-block;
+}
+form a:hover {
+	background-color: #474747; 
+	color: #ffffff;
+}

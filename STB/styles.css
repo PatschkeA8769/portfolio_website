@@ -1,0 +1,629 @@
+@charset "UTF-8";
+* {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+body {
+	background-color: #ffe8db;
+}
+#container {
+	margin: auto;
+  max-width: 2000px;
+}
+header {
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+header h1 {
+  margin: auto;
+  padding: 32px 0px 32px;
+  font-size: 4em;
+	font-family: Sansita, sans-serif;
+  font-weight: 400;
+  text-shadow: 2px 0 #ffc6a4, 0 2px #ffc6a4, -2px 0 #ffc6a4, 0 -2px #ffc6a4;
+}
+header h1 a {
+  text-decoration: none;
+	color: #98471f;
+}
+#STBlogo {
+	display: block;
+  margin: auto;
+}
+nav {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	z-index: 1;
+}
+#h-menu img {
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+#hamburger {
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+#hamburger:hover {
+	cursor:pointer;
+}
+#h-button{
+	position: fixed;
+	right: 0;
+	z-index: 1;
+	background: none;
+	padding-right: 48px;
+	padding-top: 40px;
+	font-size: 2em;
+	color: #ffe8db;
+}
+#h-button:hover {
+	cursor:pointer;
+}
+#c-menu img {
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 3;
+}
+#cross {
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 3;
+}
+#cross:hover {
+	cursor:pointer;
+}
+#c-button {
+	position: fixed;
+	right: 0;
+	z-index: 4;
+	background: none;
+	padding-right: 48px;
+  padding-top: 48px;
+	font-size: 2em;
+	color: #ffe8db;
+}
+#c-button:hover {
+	cursor:pointer;
+}
+#mobile-dropdown {
+	position: fixed;
+	z-index: 2;
+	width: 100%;
+	height: 2000px;
+	background-color: #b75e29;
+}
+#mobile-dropdown ul {
+	margin: auto;
+	list-style-type: none;
+  text-align: center;
+  padding-top: 140px;
+}
+#mobile-dropdown ul a {
+	text-decoration:none;
+	color: #ffe8db;
+	font-family: Sansita, sans-serif;
+	font-size: 2.6em;
+	line-height: 2.1em;
+  letter-spacing: .05em;
+}
+#mobile-dropdown ul a:hover {
+	color: #311a0c;
+  transition: color .2s;
+}
+main {
+	padding: 40px 40px 40px;
+  overflow: hidden;
+}
+main img {
+	display: block;
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+}
+main div {
+	background-color: #ffd0b4;
+	width: 100%;
+}
+h2 {
+	text-align: center;
+	font-family: Dekko, sans-serif;
+	font-size: 3em;
+	color: #733b19;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+p {
+	font-family: Dekko, sans-serif;
+	font-size: 1.8em;
+	color: #311a0c;
+	line-height: 1.4em;
+  padding: 0px 40px 40px;
+}
+#about {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+footer {
+  text-align: center;
+}
+footer a {
+  display: inline-block;
+}
+footer p {
+	font-family: Sansita, sans-serif;
+	color: #733b19;
+	font-size: 1.2em;
+}
+/* products page */
+#products h2 {
+  margin: auto;
+  padding: 32px 0px 32px;
+  font-size: 4em;
+	font-family: Sansita, sans-serif;
+  font-weight: 400;
+  text-shadow: 2px 0 #ffc6a4, 0 2px #ffc6a4, -2px 0 #ffc6a4, 0 -2px #ffc6a4;
+}
+#products h2 a {
+  text-decoration: none;
+	color: #98471f;
+}
+#products h1 {
+  text-align: center;
+	font-family: Dekko, sans-serif;
+	font-size: 3.6em;
+	color: #733b19;
+  text-shadow: none;
+  font-weight: bold;
+  padding: 0;
+  margin: -15px 0px -20px;
+}
+#products-main > div:first-of-type {
+  margin-top: 80px;
+}
+
+#products-main div img {
+  width: 50%;
+  height: 500px;
+}
+#products-main div div {
+  height: 500px;
+  width: 50%;
+}
+#products-main p {
+  font-size: 1.6em;
+  line-height: 1.3em;
+  padding: 0px 40px 30px;
+}
+#sweetcakes-img {
+  float: left;
+}
+#about-cakes {
+  float: right;
+}
+main h3 {
+  padding: 40px 40px 20px;
+  text-align: center;
+  font-family: Dekko, sans-serif;
+  font-size: 2.5em;
+  color: #733b19;
+}
+#bread-img {
+  clear: both;
+  float: right;
+}
+#about-bread {
+  float: left;
+}
+#sweetrolls-img {
+  clear: both;
+  float: left;
+}
+#about-sweetrolls {
+  float: right;
+}
+#products-footer p {
+  padding-top: 30px;
+}
+/* reviews  page */
+#reviews-main {
+  padding-bottom: 20px;
+}
+#reviews-main div:nth-child(-n+3) {
+  margin-top: 20px;
+}
+#reviews-main div {
+  height: 270px;
+  width: 50%;
+  border-bottom: 20px solid #ffe8db;
+}
+.left {
+  clear: left;
+  float: left;
+  border-right: 10px solid #ffe8db;
+}
+.right {
+  float: right;
+  border-left: 10px solid #ffe8db;
+}
+#reviews-main p {
+  font-size: 1.6em;
+  line-height: 1.3em;
+  padding: 40px;
+}
+/* delivery page */
+form {
+  background-color: #ffd0b4;
+  width: 100%;
+  padding: 40px;
+}
+form p {
+  display: block;
+  text-align: center;
+  font-family: Dekko, sans-serif;
+  font-size: 1.6em;
+  color: #311a0c;
+  padding: 0;
+  line-height: normal;
+  padding-bottom: 25px;
+}
+label {
+  display: block;
+  font-family: Dekko, sans-serif;
+  font-size: 1.6em;
+  color: #311a0c;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+.limit {
+  display: block;
+  text-align: left;
+  font-size: 1.2em;
+  color: #592D13;
+  padding-bottom: 20px;
+}
+input {
+  display: block;
+  font-family: Dekko, sans-serif;
+  font-size: 1.6em;
+  color: #311a0c;
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+#units {
+  display: flex;
+  width: 530px;
+  gap: 40px;
+  margin: auto;
+}
+#units input {
+  width: 150px;
+  margin-bottom: 20px;
+}
+span {
+  display: block;
+  font-family: Dekko, sans-serif;
+  font-size: 1.2em;
+  color: #592D13;
+  padding-bottom: 20px;
+}
+#total {
+  display: flex;
+  width: 524px;
+  margin: auto;
+  gap: 40px;
+}
+#total label {
+  padding-bottom: 20px;
+}
+#total input {
+  width: 60px;
+  margin-bottom: 20px;
+}
+#total div p {
+  text-align: left;
+  padding-bottom: 25px;
+}
+div div:nth-of-type(2) p:nth-of-type(2) {
+  padding-top: 5px;
+}
+#total div span {
+  padding-bottom: 0px;
+}
+#total div div {
+  display: flex;
+}
+#total div div p {
+  align-self: flex-end;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+#total div div div {
+  display: flex;
+  flex-direction: column;
+}
+form > p {
+  padding-top: 24px;
+}
+fieldset {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: auto;
+}
+legend {
+  display: block;
+  font-family: Dekko, sans-serif;
+  font-size: 1.6em;
+  color: #311a0c;
+  padding-bottom: 30px;
+  font-weight: 700;
+  margin: auto;
+}
+fieldset label {
+  padding-bottom: 40px;
+}
+fieldset input {
+  margin-bottom: 20px;
+}
+.address {
+  display: flex;
+  width: 600px;
+  gap: 40px;
+  margin: auto;
+}
+.address input {
+  width: 100%;
+}
+fieldset span {
+  padding-bottom: 5px;
+}
+#submit {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+input[type="reset"], input[type="submit"] {
+  background-color: #ffffff;
+  cursor: pointer;
+  width: 140px;
+  margin-bottom: 20px;
+}
+input[type="reset"]:hover, input[type="submit"]:hover {
+ background-color: #fff3ed;
+}
+/* checkout  page */
+#checkout {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: auto;
+  padding-top: 20px;
+}
+#checkout input {
+  margin-bottom: 20px;
+}
+#checkout label {
+  padding-bottom: 40px;
+}
+#review-order {
+  width: 200px;
+}
+#message {
+  text-align: center;
+  padding-bottom: 15px;
+  padding-top: 20px;
+}
+@media screen and (max-width: 1100px) {
+  #h-menu img, #c-menu img {
+    display: none;
+  }
+  #h-button {
+    color: #733b19;
+    right: 40px;
+    top: 32px;
+    padding: 0;
+    font-size: 2.5em;
+    position: absolute;
+  }
+  #c-button {
+    right: 40px;
+    top: 32px;
+    padding: 0;
+    font-size: 2.5em;
+  }
+  header h1, #products h2 {
+    max-width: 400px;
+    font-size: 3.6em;
+  }
+  #STBlogo {
+    width: 240px;
+  }
+  nav, #hamburger {
+    position: absolute;
+  }
+  main img {
+    height:400px;
+  }
+  #products h1 {
+    max-width: none;
+    font-size: 3.3em;
+  }
+  #products-main div img, #products-main div div {
+    width: 100%;
+    height: 400px;
+  }
+  #sweetcakes-img, #about-cakes, #bread-img, #about-bread, #sweetrolls-img, #about-sweetrolls {
+    float: none;
+  }
+  #reviews-main div {
+    width: 100%;
+  }
+  .left {
+    float: none;
+    border-right: 0px;
+  }
+  .right {
+    float: none;
+    border-left: 0px;
+  }
+  #reviews-main div:nth-child(-n+3) {
+    margin-top: 0px;
+  }
+  #reviews-main div:nth-child(-n+2) {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #units {
+    flex-direction: column;
+    width: 300px;
+    gap: 0px;
+  }
+  .units-label {
+    display: flex;
+  }
+  .units-label div:first-child {
+    padding-right: 40px;
+    margin-left: -20px;
+  }
+  #units label {
+    display: block;
+    width: 150px;
+  }
+  #units input {
+    display: inline;
+    width: 150px;
+    height: 62px;
+  }
+  #total {
+    flex-direction: column;
+    width:300px;
+    gap: 0px;
+  }
+  #total label {
+    padding-top: 5px;
+  }
+  #total div {
+    display: flex;
+    gap: 40px;
+  }
+  #total div p {
+    padding-top: 5px;
+  }
+  #total div span {
+    padding-bottom: 5px;
+  }
+  #total div div {
+    gap: 0px;
+  }
+  #total div div p {
+    left: 80px;
+    top: 0px;
+  }
+  fieldset {
+    width: 400px;
+  }
+  .address {
+    width: 500px;
+  }
+}
+@media screen and (max-width: 700px) {
+  header h1, #products h2 {
+    max-width: 350px;
+    font-size: 3.4em;
+  }
+  #STBlogo {
+    width: 200px;
+  }
+  #products h1 {
+    font-size: 3.1em;
+  }
+  #products-main div div {
+    height: 470px;
+  }
+  #reviews-main div {
+    height: 320px;
+  }
+  #units {
+    width: 150px;
+  }
+  .units-label {
+    display: block;
+  }
+  .units-label div:first-child {
+    padding-right: 0px;
+    margin-left: 0px;
+  }
+  .units-label div {
+    padding-right: 0px;
+  }
+  #units label {
+    margin: auto;
+  }
+  #total {
+    width: 150px;
+  }
+  #total label {
+    padding-top: 0px;
+  }
+  #total div {
+    display: block;
+  }
+  #total div p:first-child {
+    padding-bottom: 0px;
+  }
+  #total div p:last-child {
+    padding-top: 10px;
+  }
+  #total div span {
+    padding-bottom: 20px;
+  }
+  div div:nth-of-type(2) p:first-child {
+    padding-bottom: 15px;
+  }
+  div div:nth-of-type(2) p:last-child {
+    padding-bottom: 25px;
+  }
+  fieldset {
+    width: 100%;
+  }
+  .address {
+    display: block;
+    width: 100%;
+  }
+  #submit {
+    display: block;
+  }
+  input[type="reset"], input[type="submit"] {
+    width: 100%;
+  }
+  input[type="submit"] {
+    margin-bottom: 40px;
+  }
+}
+@media screen and (max-width: 520px) {
+  #reviews-main div {
+    height: 400px;
+  }
+}
+@media screen and (max-width: 500px) {
+  header h1, #products h2 {
+    max-width: 200px;
+  }
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0">
+    <meta name="title" content="Texas Museum of Natural Science | Minerals">
+    <meta name="description" content="Official website of the Texas Museum of Natural Science, the largest museum and research complex of it's kind, with 4 museums, 1 research center, and affiliates around the country.">
+    <title>TMNS | Texas Minerals</title>
+    <link href="styles.css" media="screen" rel="stylesheet" type="text/css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/7171ae1460.js" crossorigin="anonymous"></script>
+		<link rel="icon" type="image/png" href="../Images/tmnslogo-72.png" sizes="72x72">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="../hamburger.js"></script>
+    <script src="../top_button.js"></script>
+    <script>
+    $(window).on('load', function () {
+      $('#topaz').click(function() {
+        $('#topaz2').show();
+      });
+      $('#agate').click(function() {
+        $('#agate2').show();
+      });
+      $('#opal').click(function() {
+        $('#opal2').show();
+      });
+      $('#pearl').click(function() {
+        $('#pearl2').show();
+      });
+      $('#jasper').click(function() {
+        $('#jasper2').show();
+      });
+      $('#cinnabar').click(function() {
+        $('#cinnabar2').show();
+      });
+      $('.hover_bg').click(function(){
+        $('.hover_bg').hide();
+      });
+      $('.closeWrap').click(function() {
+        $('.hover_bg').hide();
+      });
+    });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <img src="../Images/tmnslogo.png" alt="tmnslogo" id="tmnslogo">
+        <img src="Images/agate.jpg" alt="agate detail">
+        <h1>Texas<br>Minerals</h1>
+      </header>
+      <nav>
+				<ul>
+					<li><a href="../index.html">Home</a></li>
+					<li><a href="../Flora/flora.html">Flora</a></li>
+					<li><a href="../Space/space.html">Space</a></li>
+					<li><a href="../Fossils/fossils.html">Fossils</a></li>
+					<li><a id="active" href="minerals.html">Minerals</a></li>
+				</ul>
+			</nav>
+      <!-- mobile nav -->
+			<div id="dropdown-button">
+				<button id="hamburger" aria-label="open drop-down menu"><i class="fas fa-bars"></i></button>
+				<button id="cross" aria-label="close drop-down menu"><i class="fas fa-times"></i></button>
+				<div id="mobile-dropdown">
+					<ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../Flora/flora.html">Flora</a></li>
+						<li><a href="../Space/space.html">Space</a></li>
+						<li><a href="../Fossils/fossils.html">Fossils</a></li>
+						<li><a href="minerals.html">Minerals</a></li>
+					</ul>
+				</div>
+			</div>
+			<button id="btn">Top</button>
+      <main>
+        <p>The mineral and gem collection at the Texas Museum of Natural Science consists of approximately 2000 mineral specimens and 100 gems mined in Texas, making it the largest of its kind. Along with the specimens highlighted here, the Lone Star Blue Topaz and other spectacular items from the collection can be seen.</p>
+        <div class="row">
+          <div class="column">
+            <a class="trigger_popup" id="topaz">
+            <div class="terrabox">
+              <img src="Images/blue-topaz.jpg" alt="blue topaz">
+              <p>Blue Topaz (Lone Star)</p>
+            </div>
+            </a>
+            <a class="trigger_popup" id="agate">
+              <div class="terrabox">
+                <img src="Images/chalcedony.jpg" alt="chalcedony">
+                <p>Agate (variety Plume)</p>
+              </div>
+            </a>
+            <a class="trigger_popup" id="opal">
+              <div class="terrabox">
+                <img src="Images/opal.jpg" alt="opal">
+                <p>Opal</p>
+              </div>
+            </a>
+          </div>
+          <div class="column">
+            <a class="trigger_popup" id="pearl">
+              <div class="terrabox">
+                <img src="Images/pearl.jpg" alt="pearl">
+                <p>Pearl (Concho River)</p>
+              </div>
+            </a>
+            <a class="trigger_popup" id="jasper">
+              <div class="terrabox">
+                <img src="Images/jasper.jpg" alt="jasper">
+                <p>Jasper (variety Red)</p>
+              </div>
+            </a>
+            <a class="trigger_popup" id="cinnabar">
+              <div class="terrabox">
+                <img src="Images/cinnabar.jpg" alt="cinnabar">
+                <p>Cinnabar</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </main>
+      <div class="hover_bg" id="topaz2">
+        <span class="helper"></span>
+        <div>
+          <div class="closeWrap">
+            <button class="closeButton"><i class="fas fa-times"></i>
+            </button>
+          </div>
+          <h2>Blue Topaz</h2>
+          <img src="Images/blue-topaz.jpg" alt="blue topaz">
+          <p>Colorless and light-blue topaz can be found in Mason County, in the stretch of Precambrian granite west of the Llano Uplift.</p>
+        </div>
+      </div>
+      <div class="hover_bg" id="agate2">
+        <span class="helper"></span>
+        <div>
+          <div class="closeWrap">
+            <button class="closeButton"><i class="fas fa-times"></i>
+            </button>
+          </div>
+          <h2>Agate (variety Plume)</h2>
+          <img src="Images/chalcedony.jpg" alt="chalcedony">
+          <p>Plume agate, moss agate, as well as red and black agate, are available in Brewster County, near the western town of Alpine.</p>
+        </div>
+      </div>
+      <div class="hover_bg" id="opal2">
+        <span class="helper"></span>
+        <div>
+          <div class="closeWrap">
+            <button class="closeButton"><i class="fas fa-times"></i>
+            </button>
+          </div>
+          <h2>Opal</h2>
+          <img src="Images/opal.jpg" alt="opal">
+          <p>Texas opal can be found in the Catahoula Formation, a fossilized wood structure that stretches along the eastern Gulf coast of Texas and into Louisiana.</p>
+        </div>
+      </div>
+      <div class="hover_bg" id="pearl2">
+        <span class="helper"></span>
+        <div>
+          <div class="closeWrap">
+            <button class="closeButton"><i class="fas fa-times"></i>
+            </button>
+          </div>
+          <h2>Pearl (Concho River)</h2>
+          <img src="Images/pearl.jpg" alt="pearl">
+          <p>Texas is a great source for freshwater pearls, which are found in the Highland Lakes area of central Texas. The Concho River, a tributary of the Colorado River in west Texas, yields the prized pink, purple and lavender Concho pearl.</p>
+        </div>
+      </div>
+      <div class="hover_bg" id="jasper2">
+        <span class="helper"></span>
+        <div>
+          <div class="closeWrap">
+            <button class="closeButton"><i class="fas fa-times"></i>
+            </button>
+          </div>
+          <h2>Jasper (variety Red)</h2>
+          <img src="Images/jasper.jpg" alt="jasper">
+          <p>Jasper, a form of chert, is usually red, green, yellow or brown and can be found in the limestone formations in the west central counties of San Saba and McCulloch, as well as in Moore County in the northern panhandle.</p>
+        </div>
+      </div>
+      <div class="hover_bg" id="cinnabar2">
+        <span class="helper"></span>
+        <div>
+          <div class="closeWrap">
+            <button class="closeButton"><i class="fas fa-times"></i>
+            </button>
+          </div>
+          <h2>Cinnabar</h2>
+          <img src="Images/cinnabar.jpg" alt="cinnabar">
+          <p>Cinnabar, which is the red ore from which mercury is extracted, is visible in the bluffs of west Texas.</p>
+        </div>
+      </div>
+      <footer>
+        <img src="../Images/tmnslogo.png" alt="tmnslogo" id="footlogo">
+        <h2><a href="../index.html">Texas Museum of Natural Science</a></h2>
+        <p>Created by Amanda Patschke <i class="far fa-copyright"></i> 2019</p>
+      </footer>
+    </div>
+  </body>
+</html>
