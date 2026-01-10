@@ -323,7 +323,7 @@ span {
 }
 #total {
   display: flex;
-  width: 524px;
+  width: 700px;
   margin: auto;
   gap: 40px;
 }
@@ -407,23 +407,7 @@ input[type="reset"], input[type="submit"] {
 input[type="reset"]:hover, input[type="submit"]:hover {
  background-color: #fff3ed;
 }
-/* checkout  page */
-#checkout {
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  margin: auto;
-  padding-top: 20px;
-}
-#checkout input {
-  margin-bottom: 20px;
-}
-#checkout label {
-  padding-bottom: 40px;
-}
-#review-order {
-  width: 200px;
-}
+/* order  page */
 #message {
   text-align: center;
   padding-bottom: 15px;

@@ -18,8 +18,9 @@ ob_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="hamburger.js"></script>
   <?php
-  $cakesErr = $breadErr = $rollsErr = $totalErr = $F_nameErr = $L_nameErr = $streetErr = $address2Err = $cityErr = $stateErr = $zipErr = $countryErr = "";
-  $cakes = $bread = $rolls = $F_name = $L_name = $street = $address2 = $city = $state = $zip = $country = "";
+  $cakesErr = $breadErr = $rollsErr = $totalErr = $F_nameErr = $L_nameErr = $streetErr = $address2Err = $cityErr = $stateErr = $zipErr = $countryErr = $discountErr = $emailErr = "";
+  $cakes = $bread = $rolls = $F_name = $L_name = $street = $address2 = $city = $state = $zip = $country = $email = "";
+  $discount = 0;
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $valid = true;
     $cakes = test_input($_POST['sweetcakes']);
@@ -144,6 +145,29 @@ ob_start();
         $valid = false;
       }
     }
+    if (empty($_POST['discount'])) {
+    } else {
+      $discount = test_input($_POST['discount']);
+      if (!preg_match("/^[a-zA-Z]*$/",$discount)) {
+        $discountErr = "* Only letters allowed";
+        $valid = false;
+      }
+      if (strlen($discount) > 150) {
+        $discountErr = "* Discount code can't be longer than 150 characters";
+        $valid = false;
+      }
+    }
+    if (empty($_POST['email'])) {
+      $emailErr = "* Email required";
+      $valid = false;
+    } else {
+      $email = test_input($_POST['email']);
+      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "* Invalid email format";
+        $valid = false;
+      }
+    }
     if ($valid) {
       $cakes_price = $cakes * 3;
       $bread_price = $bread;
@@ -156,7 +180,7 @@ ob_start();
         $valid = false;
       }
       //Create connection
-      $con = mysqli_connect('localhost','root','');
+      $con = mysqli_connect('my-mysql','root','swiftwing');
       if (!$con) {
         die();
       }
@@ -165,10 +189,10 @@ ob_start();
         die();
       }*/
       //Create database
-      $sql = 'CREATE DATABASE STB';
+      /*$sql = 'CREATE DATABASE STB';
       if (mysqli_query($con, $sql)) {
         echo "STB created.";
-      }
+      }*/
       //Select database
       $select = mysqli_select_db($con, 'STB');
       if (!$select)
@@ -185,7 +209,7 @@ ob_start();
         echo "Selected.";
       }*/
       //Create table
-      $sql = 'CREATE TABLE Delivery (
+      /*$sql = 'CREATE TABLE Delivery (
         Id INT AUTO_INCREMENT, PRIMARY KEY(Id),
         Date DATETIME DEFAULT CURRENT_TIMESTAMP,
         Cakes TINYINT(255),
@@ -199,15 +223,15 @@ ob_start();
         City CHAR(255),
         State CHAR(255),
         Zip CHAR(15),
-        Country CHAR(255)/*,
-        Email CHAR(254) NOT NULL,
-        Discount CHAR(150) NOT NULL*/
+        Country CHAR(255),
+        Discount CHAR(150) NOT NULL,
+        Email CHAR(254) NOT NULL
       )';
       if (mysqli_query($con, $sql)) {
         echo "Created.";
-      }
+      }*/
       //Insert data
-      $sql = "INSERT INTO Delivery (Cakes, Bread, Rolls, Total, FirstName, LastName, StreetAddress, AddressLine2, City, State, Zip, Country) VALUES ('$cakes', '$bread', '$rolls', '$total', '$F_name', '$L_name', '$street', '$address2', '$city', '$state', '$zip', '$country')";
+      $sql = "INSERT INTO Delivery (Cakes, Bread, Rolls, Total, FirstName, LastName, StreetAddress, AddressLine2, City, State, Zip, Country, Discount, Email) VALUES ('$cakes', '$bread', '$rolls', '$total', '$F_name', '$L_name', '$street', '$address2', '$city', '$state', '$zip', '$country', '$discount', '$email')";
       //Insert data using session
       /*$_SESSION['cakes'] = $cakes;
       $_SESSION['bread'] = $bread;
@@ -221,7 +245,7 @@ ob_start();
     if (mysqli_query($con, $sql)) {
       echo "Data inserted.";
       mysqli_close($con);
-      header ('Location: http://localhost/GitHub/portfolio_website/STB/checkout.php');
+      header ('Location: http://localhost:8080/STB/order.php');
       exit();
     }
   }
@@ -295,6 +319,10 @@ ob_start();
             </div>
           </div>
         </div>
+        <div>
+          <label for="discount">Discount code:</label>
+          <input type="text" name="discount" id="discount"><span><?php echo $discountErr;?></span>
+        </div>
         <div id="total">
           <div>
             <label for="subtotal">Subtotal:</label>
@@ -314,10 +342,22 @@ ob_start();
             <label for="tax">Sales Tax:</label>
             <div>
               <input type="text" name="tax" id="tax" value="0" readonly>
-              <p>Septims</p></div>
+              <p>Septims</p>
+            </div>
+          </div>
+          <div>
+            <label for="order-total">Order Total:</label>
+            <div>
+                <input type="text" name="order-total" id="order-total" value="0" readonly>
+                <p>Septims</p>
+            </div>
           </div>
         </div>
-        <p>Prices are negotiable. Call Salmo at +1-202-555-0141 to haggle!</p>
+        <fieldset>
+          <legend>Email Address</legend>
+          <input type="email" name="email" id="email"><span><?php echo $emailErr;?></span>
+          <label for="email">Email</label>
+        </fieldset>
         <fieldset>
           <legend>Shipping/Billing Address</legend>
           <input type="text" name="F_name" id="F_name"><span><?php echo $F_nameErr;?></span>
@@ -370,7 +410,7 @@ ob_start();
 
         </script>
         <div id="submit">
-          <input type="submit" value="Checkout"><input type="reset" value="Reset">
+          <input type="submit" value="Order"><input type="reset" value="Reset">
         </div>
       </form>
     </main>
