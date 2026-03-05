@@ -1,5 +1,107 @@
 <?php
 ob_start();
+//validation
+$nameErr = $emailErr = $detailsErr = "";
+$name = $email = $details = "";
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $valid = true;
+  if (empty($_POST['name'])) {
+    $nameErr = "* Name required";
+    $valid = false;
+  } else {
+    $name = test_input($_POST['name']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+      $nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($name) > 255) {
+      $nameErr = "* Name can't be longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['email'])) {
+    $emailErr = "* Email required";
+    $valid = false;
+  } else {
+    $email = test_input($_POST['email']);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "* Invalid email format";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['details'])) {
+    $detailsErr = "* Details required";
+    $valid = false;
+  } else {
+    $details = test_input($_POST['details']);
+    if (strlen($details) > 5000) {
+      $detailsErr = "* Details can't be longer than 5000 characters";
+      $valid = false;
+    }
+  }
+  if ($valid) {
+    //Create connection
+    /*$con = mysqli_connect('localhost','root','');
+    if (!$con) {
+        die();
+    } */
+    $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    if (!$con) {
+        die();
+    }
+    //Create database
+    /*$sql = 'CREATE DATABASE Start';
+    if (mysqli_query($con, $sql)) {
+      echo 'Portfolio created.';
+    }*/
+    //Select database
+    /*$select = mysqli_select_db($con, 'Start');
+    if (!$select)
+    {
+      die();
+    }/* else {
+      echo "Selected.";
+    }*/
+    $select = mysqli_select_db($con, '3670719_start');
+    if (!$select)
+    {
+      die();
+    } else {
+      echo "Selected.";
+    }
+    //Create table
+    $sql = 'CREATE TABLE Start (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Name CHAR(255), Email CHAR(254), Details VARCHAR(5000))';
+    if (mysqli_query($con, $sql)) {
+      echo "Created.";
+    }
+    //Check for room in table and insert database
+    $rowcount = 'SELECT COUNT(*) FROM Start';
+    if ($rowcount < 101) {
+      $sql = "INSERT INTO Start (Name, Email, Details) VALUES ('$name',  '$email', '$details')";
+    }
+    if (mysqli_query($con, $sql)) {
+      echo "Data inserted.";
+      mysqli_close($con);
+      header ('Location: http://amandapatschke.com/start2.php');
+      exit();
+    }
+    //Insert data using sessions
+    /*$_SESSION['name'] = $name;
+    $_SESSION['email'] = $email;
+    $_SESSION['details'] = $details;
+    $_SESSION['submit'] = $_POST[submit];
+    //redirect
+    /*header ('Location: http://localhost/start2.php');*/
+  }
+}
+function test_input($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,110 +122,6 @@ ob_start();
       window.history.back();
     }
     </script>
-    <?php
-    //validation
-    $nameErr = $emailErr = $detailsErr = "";
-    $name = $email = $details = "";
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-      $valid = true;
-      if (empty($_POST['name'])) {
-        $nameErr = "* Name required";
-        $valid = false;
-      } else {
-        $name = test_input($_POST['name']);
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-          $nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
-          $valid = false;
-        }
-        if (strlen($name) > 255) {
-          $nameErr = "* Name can't be longer than 255 characters";
-          $valid = false;
-        }
-      }
-      if (empty($_POST['email'])) {
-        $emailErr = "* Email required";
-        $valid = false;
-      } else {
-        $email = test_input($_POST['email']);
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          $emailErr = "* Invalid email format";
-          $valid = false;
-        }
-      }
-      if (empty($_POST['details'])) {
-        $detailsErr = "* Details required";
-        $valid = false;
-      } else {
-        $details = test_input($_POST['details']);
-        if (strlen($details) > 5000) {
-          $detailsErr = "* Details can't be longer than 5000 characters";
-          $valid = false;
-        }
-      }
-      if ($valid) {
-        //Create connection
-        /*$con = mysqli_connect('localhost','root','');
-        if (!$con) {
-            die();
-        } */
-        $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
-        if (!$con) {
-            die();
-        }
-        //Create database
-        /*$sql = 'CREATE DATABASE Start';
-        if (mysqli_query($con, $sql)) {
-          echo 'Portfolio created.';
-        }*/
-        //Select database
-        /*$select = mysqli_select_db($con, 'Start');
-        if (!$select)
-        {
-          die();
-        }/* else {
-          echo "Selected.";
-        }*/
-        $select = mysqli_select_db($con, '3670719_start');
-        if (!$select)
-        {
-        	die();
-        } else {
-          echo "Selected.";
-        }
-        //Create table
-        $sql = 'CREATE TABLE Start (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Name CHAR(255), Email CHAR(254), Details VARCHAR(5000))';
-        if (mysqli_query($con, $sql)) {
-          echo "Created.";
-        }
-        //Check for room in table and insert database
-        $rowcount = 'SELECT COUNT(*) FROM Start';
-        if ($rowcount < 101) {
-          $sql = "INSERT INTO Start (Name, Email, Details) VALUES ('$name',  '$email', '$details')";
-        }
-        if (mysqli_query($con, $sql)) {
-          echo "Data inserted.";
-          mysqli_close($con);
-          header ('Location: http://amandapatschke.com/start2.php');
-          exit();
-        }
-        //Insert data using sessions
-        /*$_SESSION['name'] = $name;
-        $_SESSION['email'] = $email;
-        $_SESSION['details'] = $details;
-        $_SESSION['submit'] = $_POST[submit];
-        //redirect
-        /*header ('Location: http://localhost/start2.php');*/
-      }
-    }
-    function test_input($data)
-    {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
-    ?>
   </head>
   <body>
     <div id="container">

@@ -1,5 +1,100 @@
 <?php
 ob_start();
+//Validation
+$userErr = $emailErr = $passwordErr = $conpassErr = "";
+$user = $email = $password = $conpass = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $valid = true;
+  if (empty($_POST['user'])) {
+    $userErr = "* Username required";
+    $valid = false;
+  } else {
+    $user = test_input($_POST['user']);
+    if (!preg_match('/^[0-9a-zA-Z]{3,20}$/',$user)) {
+      $userErr = "* Invalid username format";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['email'])) {
+    $emailErr = "* Email required";
+    $valid = false;
+  } else {
+    $email = test_input($_POST['email']);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "* Invalid email format";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['password'])) {
+    $passwordErr = "* Password required";
+    $valid = false;
+  } else {
+    $password = test_input($_POST['password']);
+    if (!preg_match('/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$/',$password)) {
+      $passwordErr = "* Invalid password format";
+      $valid = false;
+    }
+  }
+  if ($_POST['password'] !== $_POST['conpass']) {
+    $conpassErr = "* Password doesn't match";
+    $valid = false;
+  }
+  if ($valid) {
+    //Create connection
+    /*$con = mysqli_connect('localhost','root','');
+    if (!$con) {
+      die();
+    }*/
+    $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    if (!$con) {
+      die();
+    }
+    //Create database
+    /*$sql = "CREATE DATABASE DSW";
+      if (mysqli_query($con, $sql)) {
+        echo 'Register created.';
+    }*/
+    //Select database
+    /*$select = mysqli_select_db($con, 'DSW');
+    if (!$select)
+    {
+      die();
+    } else {
+      echo "Selected.";
+    }*/
+    $select = mysqli_select_db($con, '3670719_start');
+    if (!$select)
+    {
+      die();
+    } else {
+      echo "Selected.";
+    }
+    //Create table
+    $sql = "CREATE TABLE Register (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Username CHAR(20), Email CHAR(254), Password CHAR(128))";
+    if (mysqli_query($con, $sql)) {
+      echo "Created.";
+    }
+    //Check for room in table and insert data
+    $rowcount = "SELECT COUNT(*) FROM Register";
+    if ($rowcount < 101) {
+      $sql = "INSERT INTO Register (Username, Email, Password) VALUES ('$user',  '$email', '$password')";
+    }
+    if (mysqli_query($con, $sql)) {
+      echo "Data inserted.";
+      mysqli_close($con);
+      header ('Location: http://amandapatschke.com/DSW/login.php');
+      exit();
+    }
+  }
+}
+function test_input($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,103 +109,6 @@ ob_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet"> 
     <link rel="icon" type="image/png" href="Images/dark_sign.png" sizes="72x72">
-    <?php
-    //Validation
-    $userErr = $emailErr = $passwordErr = $conpassErr = "";
-    $user = $email = $password = $conpass = "";
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $valid = true;
-      if (empty($_POST['user'])) {
-        $userErr = "* Username required";
-        $valid = false;
-      } else {
-        $user = test_input($_POST['user']);
-        if (!preg_match('/^[0-9a-zA-Z]{3,20}$/',$user)) {
-          $userErr = "* Invalid username format";
-          $valid = false;
-        }
-      }
-      if (empty($_POST['email'])) {
-        $emailErr = "* Email required";
-        $valid = false;
-      } else {
-        $email = test_input($_POST['email']);
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          $emailErr = "* Invalid email format";
-          $valid = false;
-        }
-      }
-      if (empty($_POST['password'])) {
-        $passwordErr = "* Password required";
-        $valid = false;
-      } else {
-        $password = test_input($_POST['password']);
-        if (!preg_match('/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$/',$password)) {
-          $passwordErr = "* Invalid password format";
-          $valid = false;
-        }
-      }
-      if ($_POST['password'] !== $_POST['conpass']) {
-        $conpassErr = "* Password doesn't match";
-        $valid = false;
-      }
-      if ($valid) {
-        //Create connection
-        /*$con = mysqli_connect('localhost','root','');
-        if (!$con) {
-          die();
-        }*/
-        $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
-        if (!$con) {
-          die();
-        }
-        //Create database
-        /*$sql = "CREATE DATABASE DSW";
-          if (mysqli_query($con, $sql)) {
-            echo 'Register created.';
-        }*/
-        //Select database
-        /*$select = mysqli_select_db($con, 'DSW');
-        if (!$select)
-        {
-          die();
-        } else {
-          echo "Selected.";
-        }*/
-        $select = mysqli_select_db($con, '3670719_start');
-        if (!$select)
-        {
-          die();
-        } else {
-          echo "Selected.";
-        }
-        //Create table
-        $sql = "CREATE TABLE Register (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Username CHAR(20), Email CHAR(254), Password CHAR(128))";
-        if (mysqli_query($con, $sql)) {
-          echo "Created.";
-        }
-        //Check for room in table and insert data
-        $rowcount = "SELECT COUNT(*) FROM Register";
-        if ($rowcount < 101) {
-          $sql = "INSERT INTO Register (Username, Email, Password) VALUES ('$user',  '$email', '$password')";
-        }
-        if (mysqli_query($con, $sql)) {
-          echo "Data inserted.";
-          mysqli_close($con);
-          header ('Location: http://amandapatschke.com/DSW/login.php');
-          exit();
-        }
-      }
-    }
-    function test_input($data)
-    {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
-    ?>
   </head>
   <body>
     <div id="container">

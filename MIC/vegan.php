@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <?php
 error_reporting(E_ALL ^ E_WARNING);
 include 'array.php';
 ?>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">

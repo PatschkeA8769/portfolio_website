@@ -1,5 +1,108 @@
 <?php
 ob_start();
+//Validation
+$nameErr = $emailErr = $messageErr = "";
+$name = $email = $message = "";
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $valid = true;
+  if (empty($_POST['name'])) {
+    $nameErr = "* Name required";
+    $valid = false;
+  } else {
+    $name = test_input($_POST['name']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+      $nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($name) > 255) {
+      $nameErr = "* Name can't be longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['email'])) {
+    $emailErr = "* Email required";
+    $valid = false;
+  } else {
+    $email = test_input($_POST['email']);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "* Invalid email format";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['message'])) {
+    $messageErr = "* Message required";
+    $valid = false;
+  } else {
+    $message = test_input($_POST['message']);
+    if (strlen($message) > 5000) {
+      $messageErr = "* Message can't be longer than 5000 characters";
+      $valid = false;
+    }
+  }
+  if ($valid) {
+    //Create connection
+    /*$con = mysqli_connect('localhost','root','');
+    if (!$con) {
+      die();
+    }*/
+    $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    if (!$con) {
+      die();
+    }
+    //Create database
+    /*$sql = 'CREATE DATABASE Contact';
+    if (mysqli_query($con, $sql)) {
+      echo 'Portfolio created.';
+    }*/
+    //Select database
+    /*$select = mysqli_select_db($con, 'Contact');
+    if (!$select)
+    {
+      die();
+    }/* else {
+      echo "Selected.";
+    }*/
+    //Select database
+    $select = mysqli_select_db($con, '3670719_start');
+    if (!$select)
+    {
+      die();
+    } else {
+      echo "Selected.";
+    }
+    //Create table
+    $sql = 'CREATE TABLE Contact (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Name CHAR(255), Email CHAR(254), Message VARCHAR(5000))';
+    if (mysqli_query($con, $sql)) {
+      echo "Created.";
+    }
+    //Check for room in table and insert data
+    $rowcount = 'SELECT COUNT(*) FROM Contact';
+    if ($rowcount < 101) {
+      $sql = "INSERT INTO Contact (Name, Email, Message) VALUES ('$name',  '$email', '$message')";
+    }
+    if (mysqli_query($con, $sql)) {
+      echo "Data inserted.";
+      mysqli_close($con);
+      header ('Location: http://amandapatschke.com/contact2.php');
+      exit();
+    }
+    //Insert data using sessions
+    /*$_SESSION['name'] = $name;
+    $_SESSION['email'] = $email;
+    $_SESSION['message'] = $message;
+    $_SESSION['submit'] = $_POST['submit'];
+    //redirect
+    /*header ('Location: http://localhost/contact2.php');*/
+  }
+}
+function test_input($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,111 +123,6 @@ ob_start();
       window.history.back();
     }
     </script>
-    <?php
-    //Validation
-    $nameErr = $emailErr = $messageErr = "";
-    $name = $email = $message = "";
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-      $valid = true;
-      if (empty($_POST['name'])) {
-        $nameErr = "* Name required";
-        $valid = false;
-      } else {
-        $name = test_input($_POST['name']);
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-          $nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
-          $valid = false;
-        }
-        if (strlen($name) > 255) {
-          $nameErr = "* Name can't be longer than 255 characters";
-          $valid = false;
-        }
-      }
-      if (empty($_POST['email'])) {
-        $emailErr = "* Email required";
-        $valid = false;
-      } else {
-        $email = test_input($_POST['email']);
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          $emailErr = "* Invalid email format";
-          $valid = false;
-        }
-      }
-      if (empty($_POST['message'])) {
-        $messageErr = "* Message required";
-        $valid = false;
-      } else {
-        $message = test_input($_POST['message']);
-        if (strlen($message) > 5000) {
-          $messageErr = "* Message can't be longer than 5000 characters";
-          $valid = false;
-        }
-      }
-      if ($valid) {
-        //Create connection
-        /*$con = mysqli_connect('localhost','root','');
-        if (!$con) {
-          die();
-        }*/
-        $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
-        if (!$con) {
-          die();
-        }
-        //Create database
-        /*$sql = 'CREATE DATABASE Contact';
-        if (mysqli_query($con, $sql)) {
-          echo 'Portfolio created.';
-        }*/
-        //Select database
-        /*$select = mysqli_select_db($con, 'Contact');
-        if (!$select)
-        {
-          die();
-        }/* else {
-          echo "Selected.";
-        }*/
-        //Select database
-        $select = mysqli_select_db($con, '3670719_start');
-        if (!$select)
-        {
-        	die();
-        } else {
-          echo "Selected.";
-        }
-        //Create table
-        $sql = 'CREATE TABLE Contact (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Name CHAR(255), Email CHAR(254), Message VARCHAR(5000))';
-        if (mysqli_query($con, $sql)) {
-          echo "Created.";
-        }
-        //Check for room in table and insert data
-        $rowcount = 'SELECT COUNT(*) FROM Contact';
-        if ($rowcount < 101) {
-          $sql = "INSERT INTO Contact (Name, Email, Message) VALUES ('$name',  '$email', '$message')";
-        }
-        if (mysqli_query($con, $sql)) {
-          echo "Data inserted.";
-          mysqli_close($con);
-          header ('Location: http://amandapatschke.com/contact2.php');
-          exit();
-        }
-        //Insert data using sessions
-        /*$_SESSION['name'] = $name;
-        $_SESSION['email'] = $email;
-        $_SESSION['message'] = $message;
-        $_SESSION['submit'] = $_POST['submit'];
-        //redirect
-        /*header ('Location: http://localhost/contact2.php');*/
-      }
-    }
-    function test_input($data)
-    {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
-    ?>
   </head>
   <body>
     <div id="container">

@@ -1,3 +1,29 @@
+<?php
+//Create connection
+/*$con = mysqli_connect('localhost','root','');
+if (!$con) {
+    die();
+}*/
+$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+if (!$con) {
+    die();
+}
+//Select database
+/*$select = mysqli_select_db($con, 'Portfolio');
+if (!$select)
+{
+  die();
+}/* else {
+  echo "Selected.";
+}*/
+$select = mysqli_select_db($con, '3670719_start');
+if (!$select)
+{
+  die();
+}/* else {
+  echo "Selected.";
+}*/
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,32 +43,6 @@
       window.history.back();
     }
     </script>
-    <?php
-    //Create connection
-    /*$con = mysqli_connect('localhost','root','');
-    if (!$con) {
-        die();
-    }*/
-    $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
-    if (!$con) {
-        die();
-    }
-    //Select database
-    /*$select = mysqli_select_db($con, 'Portfolio');
-    if (!$select)
-    {
-      die();
-    }/* else {
-      echo "Selected.";
-    }*/
-    $select = mysqli_select_db($con, '3670719_start');
-    if (!$select)
-    {
-    	die();
-    }/* else {
-      echo "Selected.";
-    }*/
-    ?>
   </head>
   <body>
     <div id="container">

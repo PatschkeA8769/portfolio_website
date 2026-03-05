@@ -1,5 +1,242 @@
 <?php
 ob_start();
+$cakesErr = $breadErr = $rollsErr = $totalErr = $F_nameErr = $L_nameErr = $streetErr = $address2Err = $cityErr = $stateErr = $zipErr = $countryErr = $discountErr = $emailErr = "";
+$cakes = $bread = $rolls = $F_name = $L_name = $street = $address2 = $city = $state = $zip = $country = $email = "";
+$discount = 0;
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $valid = true;
+  $cakes = test_input($_POST['sweetcakes']);
+  if (filter_var($cakes, FILTER_VALIDATE_INT) === 0 || filter_var($cakes, FILTER_VALIDATE_INT, array("options" => array("min_range"=>0, "max_range"=>10)))) {
+    $valid = true;
+  } else {
+    $cakesErr = "* enter between 0 and 10";
+    $valid = false;
+  }
+  $bread = test_input($_POST['bread']);
+  if (filter_var($bread, FILTER_VALIDATE_INT) === 0 || filter_var($bread, FILTER_VALIDATE_INT, array("options" => array("min_range"=>0, "max_range"=>20)))) {
+    $valid = true;
+  } else {
+    $breadErr = "* enter between 0 and 20";
+    $valid = false;
+  }
+  $rolls = test_input($_POST['sweetrolls']);
+  if (filter_var($rolls, FILTER_VALIDATE_INT) === 0 || filter_var($rolls, FILTER_VALIDATE_INT, array("options" => array("min_range"=>0,"max_range"=>50)))) {
+    $valid = true;
+  } else {
+    $rollsErr = "* enter between  0 and 50";
+    $valid = false;
+  }
+  if (empty($_POST['F_name'])) {
+    $F_nameErr = "* First name required";
+    $valid = false;
+  } else {
+    $F_name = test_input($_POST['F_name']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$F_name)) {
+      $F_nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($F_name) > 255) {
+      $F_nameErr = "* First name can't be longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['L_name'])) {
+    $L_nameErr = "* Last name required";
+    $valid = false;
+  } else {
+    $L_name = test_input($_POST['L_name']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$L_name)) {
+      $L_nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($L_name) > 255) {
+      $L_nameErr = "* Last name can't be longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['street'])) {
+    $streetErr = "* street address required";
+    $valid = false;
+  } else {
+    $street = test_input($_POST['street']);
+  }
+  if (strlen($street) > 255) {
+    $streetErr = "* street address can't be longer than 255 characters";
+    $valid = false;
+  }
+  if (!empty($_POST['address2'])) {
+    $address2 = test_input($_POST['address2']);
+  }
+  if (strlen($address2) > 150) {
+    $address2Err = "* address line 2 can't be longer than 150 characters";
+    $valid = false;
+  }
+  if (empty($_POST['city'])) {
+    $cityErr = "* city required";
+    $valid = false;
+  } else {
+    $city = test_input($_POST['city']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$city)) {
+      $cityErr = "* only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($city) > 255) {
+      $cityErr = "* city can't be longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['state'])) {
+    $stateErr = "* state required";
+    $valid = false;
+  } else {
+    $state = test_input($_POST['state']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$state)) {
+      $stateErr = "* only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($state) < 2 || strlen($state) > 255) {
+      $stateErr = "* state can't be shorter than 2 or longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['zip'])) {
+    $zipErr = "* zip code required";
+    $valid = false;
+  } else {
+    $zip = test_input($_POST['zip']);
+    if (!preg_match("/^[0-9-]*$/",$zip)) {
+      $zipErr = "* only numbers and hyphens allowed";
+      $valid = false;
+    }
+    if (strlen($zip) > 15) {
+      $zipErr = "* zip can't be longer than 15 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['country'])) {
+    $countryErr = "* country required";
+    $valid = false;
+  } else {
+    $country = test_input($_POST['country']);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$country)) {
+      $countryErr = "* only letters, hyphens, apostrophes and whitespace allowed";
+      $valid = false;
+    }
+    if (strlen($country) > 255) {
+      $countryErr = "* country can't be longer than 255 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['discount'])) {
+  } else {
+    $discount = test_input($_POST['discount']);
+    if (!preg_match("/^[a-zA-Z]*$/",$discount)) {
+      $discountErr = "* Only letters allowed";
+      $valid = false;
+    }
+    if (strlen($discount) > 150) {
+      $discountErr = "* Discount code can't be longer than 150 characters";
+      $valid = false;
+    }
+  }
+  if (empty($_POST['email'])) {
+    $emailErr = "* Email required";
+    $valid = false;
+  } else {
+    $email = test_input($_POST['email']);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "* Invalid email format";
+      $valid = false;
+    }
+  }
+  if ($valid) {
+    $cakes_price = $cakes * 3;
+    $bread_price = $bread;
+    $rolls_price = $rolls * 2;
+    $total = $cakes_price + $bread_price + $rolls_price; //subtotal
+    if (filter_var($total, FILTER_VALIDATE_INT) !== 0) {
+      $valid = true;
+    } else {
+      $totalErr = "* total can't be 0";
+      $valid = false;
+    }
+    //Create connection
+    $con = mysqli_connect('my-mysql','root','swiftwing');
+    if (!$con) {
+      die();
+    }
+    /*$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    if (!$con) {
+      die();
+    }*/
+    //Create database
+    /*$sql = 'CREATE DATABASE STB';
+    if (mysqli_query($con, $sql)) {
+      echo "STB created.";
+    }*/
+    //Select database
+    $select = mysqli_select_db($con, 'STB');
+    if (!$select)
+    {
+      die();
+    }/* else {
+      echo "Selected.";
+    }*/
+    /*$select = mysqli_select_db($con, '3670719_start');
+    if (!$select)
+    {
+      die();
+    }/* else {
+      echo "Selected.";
+    }*/
+    //Create table
+    /*$sql = 'CREATE TABLE Delivery (
+      Id INT AUTO_INCREMENT, PRIMARY KEY(Id),
+      Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+      Cakes TINYINT(255),
+      Bread TINYINT(255),
+      Rolls TINYINT(255),
+      Total TINYINT(255),
+      FirstName CHAR(255),
+      LastName CHAR(255),
+      StreetAddress CHAR(255),
+      AddressLine2 CHAR(150),
+      City CHAR(255),
+      State CHAR(255),
+      Zip CHAR(15),
+      Country CHAR(255),
+      Discount CHAR(150) NOT NULL,
+      Email CHAR(254) NOT NULL
+    )';
+    if (mysqli_query($con, $sql)) {
+      echo "Created.";
+    }*/
+    //Insert data
+    $sql = "INSERT INTO Delivery (Cakes, Bread, Rolls, Total, FirstName, LastName, StreetAddress, AddressLine2, City, State, Zip, Country, Discount, Email) VALUES ('$cakes', '$bread', '$rolls', '$total', '$F_name', '$L_name', '$street', '$address2', '$city', '$state', '$zip', '$country', '$discount', '$email')";
+    //Insert data using session
+    /*$_SESSION['cakes'] = $cakes;
+    $_SESSION['bread'] = $bread;
+    $_SESSION['rolls'] = $rolls;
+    $_SESSION['total'] = $total;
+    echo $cakes;
+    echo $bread;
+    echo $rolls;
+    echo $total;*/
+  }
+  if (mysqli_query($con, $sql)) {
+    echo "Data inserted.";
+    mysqli_close($con);
+    header ('Location: http://localhost:8080/STB/order.php');
+    exit();
+  }
+}
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,245 +254,6 @@ ob_start();
   <link rel="icon" type="image/png" href="Images/STBlogo-72.png" sizes="72x72">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="hamburger.js"></script>
-  <?php
-  $cakesErr = $breadErr = $rollsErr = $totalErr = $F_nameErr = $L_nameErr = $streetErr = $address2Err = $cityErr = $stateErr = $zipErr = $countryErr = $discountErr = $emailErr = "";
-  $cakes = $bread = $rolls = $F_name = $L_name = $street = $address2 = $city = $state = $zip = $country = $email = "";
-  $discount = 0;
-  if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $valid = true;
-    $cakes = test_input($_POST['sweetcakes']);
-    if (filter_var($cakes, FILTER_VALIDATE_INT) === 0 || filter_var($cakes, FILTER_VALIDATE_INT, array("options" => array("min_range"=>0, "max_range"=>10)))) {
-      $valid = true;
-    } else {
-      $cakesErr = "* enter between 0 and 10";
-      $valid = false;
-    }
-    $bread = test_input($_POST['bread']);
-    if (filter_var($bread, FILTER_VALIDATE_INT) === 0 || filter_var($bread, FILTER_VALIDATE_INT, array("options" => array("min_range"=>0, "max_range"=>20)))) {
-      $valid = true;
-    } else {
-      $breadErr = "* enter between 0 and 20";
-      $valid = false;
-    }
-    $rolls = test_input($_POST['sweetrolls']);
-    if (filter_var($rolls, FILTER_VALIDATE_INT) === 0 || filter_var($rolls, FILTER_VALIDATE_INT, array("options" => array("min_range"=>0,"max_range"=>50)))) {
-      $valid = true;
-    } else {
-      $rollsErr = "* enter between  0 and 50";
-      $valid = false;
-    }
-    if (empty($_POST['F_name'])) {
-      $F_nameErr = "* First name required";
-      $valid = false;
-    } else {
-      $F_name = test_input($_POST['F_name']);
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$F_name)) {
-        $F_nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
-        $valid = false;
-      }
-      if (strlen($F_name) > 255) {
-        $F_nameErr = "* First name can't be longer than 255 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['L_name'])) {
-      $L_nameErr = "* Last name required";
-      $valid = false;
-    } else {
-      $L_name = test_input($_POST['L_name']);
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$L_name)) {
-        $L_nameErr = "* Only letters, hyphens, apostrophes and whitespace allowed";
-        $valid = false;
-      }
-      if (strlen($L_name) > 255) {
-        $L_nameErr = "* Last name can't be longer than 255 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['street'])) {
-      $streetErr = "* street address required";
-      $valid = false;
-    } else {
-      $street = test_input($_POST['street']);
-    }
-    if (strlen($street) > 255) {
-      $streetErr = "* street address can't be longer than 255 characters";
-      $valid = false;
-    }
-    if (!empty($_POST['address2'])) {
-      $address2 = test_input($_POST['address2']);
-    }
-    if (strlen($address2) > 150) {
-      $address2Err = "* address line 2 can't be longer than 150 characters";
-      $valid = false;
-    }
-    if (empty($_POST['city'])) {
-      $cityErr = "* city required";
-      $valid = false;
-    } else {
-      $city = test_input($_POST['city']);
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$city)) {
-        $cityErr = "* only letters, hyphens, apostrophes and whitespace allowed";
-        $valid = false;
-      }
-      if (strlen($city) > 255) {
-        $cityErr = "* city can't be longer than 255 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['state'])) {
-      $stateErr = "* state required";
-      $valid = false;
-    } else {
-      $state = test_input($_POST['state']);
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$state)) {
-        $stateErr = "* only letters, hyphens, apostrophes and whitespace allowed";
-        $valid = false;
-      }
-      if (strlen($state) < 2 || strlen($state) > 255) {
-        $stateErr = "* state can't be shorter than 2 or longer than 255 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['zip'])) {
-      $zipErr = "* zip code required";
-      $valid = false;
-    } else {
-      $zip = test_input($_POST['zip']);
-      if (!preg_match("/^[0-9-]*$/",$zip)) {
-        $zipErr = "* only numbers and hyphens allowed";
-        $valid = false;
-      }
-      if (strlen($zip) > 15) {
-        $zipErr = "* zip can't be longer than 15 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['country'])) {
-      $countryErr = "* country required";
-      $valid = false;
-    } else {
-      $country = test_input($_POST['country']);
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$country)) {
-        $countryErr = "* only letters, hyphens, apostrophes and whitespace allowed";
-        $valid = false;
-      }
-      if (strlen($country) > 255) {
-        $countryErr = "* country can't be longer than 255 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['discount'])) {
-    } else {
-      $discount = test_input($_POST['discount']);
-      if (!preg_match("/^[a-zA-Z]*$/",$discount)) {
-        $discountErr = "* Only letters allowed";
-        $valid = false;
-      }
-      if (strlen($discount) > 150) {
-        $discountErr = "* Discount code can't be longer than 150 characters";
-        $valid = false;
-      }
-    }
-    if (empty($_POST['email'])) {
-      $emailErr = "* Email required";
-      $valid = false;
-    } else {
-      $email = test_input($_POST['email']);
-      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "* Invalid email format";
-        $valid = false;
-      }
-    }
-    if ($valid) {
-      $cakes_price = $cakes * 3;
-      $bread_price = $bread;
-      $rolls_price = $rolls * 2;
-      $total = $cakes_price + $bread_price + $rolls_price; //subtotal
-      if (filter_var($total, FILTER_VALIDATE_INT) !== 0) {
-        $valid = true;
-      } else {
-        $totalErr = "* total can't be 0";
-        $valid = false;
-      }
-      //Create connection
-      $con = mysqli_connect('my-mysql','root','swiftwing');
-      if (!$con) {
-        die();
-      }
-      /*$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
-      if (!$con) {
-        die();
-      }*/
-      //Create database
-      /*$sql = 'CREATE DATABASE STB';
-      if (mysqli_query($con, $sql)) {
-        echo "STB created.";
-      }*/
-      //Select database
-      $select = mysqli_select_db($con, 'STB');
-      if (!$select)
-      {
-        die();
-      }/* else {
-        echo "Selected.";
-      }*/
-      /*$select = mysqli_select_db($con, '3670719_start');
-      if (!$select)
-      {
-        die();
-      }/* else {
-        echo "Selected.";
-      }*/
-      //Create table
-      /*$sql = 'CREATE TABLE Delivery (
-        Id INT AUTO_INCREMENT, PRIMARY KEY(Id),
-        Date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        Cakes TINYINT(255),
-        Bread TINYINT(255),
-        Rolls TINYINT(255),
-        Total TINYINT(255),
-        FirstName CHAR(255),
-        LastName CHAR(255),
-        StreetAddress CHAR(255),
-        AddressLine2 CHAR(150),
-        City CHAR(255),
-        State CHAR(255),
-        Zip CHAR(15),
-        Country CHAR(255),
-        Discount CHAR(150) NOT NULL,
-        Email CHAR(254) NOT NULL
-      )';
-      if (mysqli_query($con, $sql)) {
-        echo "Created.";
-      }*/
-      //Insert data
-      $sql = "INSERT INTO Delivery (Cakes, Bread, Rolls, Total, FirstName, LastName, StreetAddress, AddressLine2, City, State, Zip, Country, Discount, Email) VALUES ('$cakes', '$bread', '$rolls', '$total', '$F_name', '$L_name', '$street', '$address2', '$city', '$state', '$zip', '$country', '$discount', '$email')";
-      //Insert data using session
-      /*$_SESSION['cakes'] = $cakes;
-      $_SESSION['bread'] = $bread;
-      $_SESSION['rolls'] = $rolls;
-      $_SESSION['total'] = $total;
-      echo $cakes;
-      echo $bread;
-      echo $rolls;
-      echo $total;*/
-    }
-    if (mysqli_query($con, $sql)) {
-      echo "Data inserted.";
-      mysqli_close($con);
-      header ('Location: http://localhost:8080/STB/order.php');
-      exit();
-    }
-  }
-  function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-  ?>
 </head>
 <body>
   <div id="container">

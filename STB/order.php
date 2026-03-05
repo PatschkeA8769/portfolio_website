@@ -1,3 +1,30 @@
+<?php 
+  //Create connection
+  $con = mysqli_connect('my-mysql','root','swiftwing');
+  if (!$con) {
+    echo "Error.";
+    die();
+  }
+  /*$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+  if (!$con) {
+    die();
+  }*/
+  //Select database
+  $select = mysqli_select_db($con, 'STB');
+  if (!$select)
+  {
+    die();
+  }/* else {
+    echo "Selected.";
+  }*/
+  /*$select = mysqli_select_db($con, '3670719_start');
+  if (!$select)
+  {
+    die();
+  }/* else {
+    echo "Selected.";
+  }*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,33 +41,6 @@
   <link rel="icon" type="image/png" href="Images/STBlogo-72.png" sizes="72x72">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="hamburger.js"></script>
-  <?php 
-    //Create connection
-    $con = mysqli_connect('my-mysql','root','swiftwing');
-    if (!$con) {
-      echo "Error.";
-      die();
-    }
-    /*$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
-    if (!$con) {
-      die();
-    }*/
-    //Select database
-    $select = mysqli_select_db($con, 'STB');
-    if (!$select)
-    {
-      die();
-    }/* else {
-      echo "Selected.";
-    }*/
-    /*$select = mysqli_select_db($con, '3670719_start');
-    if (!$select)
-    {
-      die();
-    }/* else {
-      echo "Selected.";
-    }*/
-  ?>
 </head>
 <body>
   <div id="container">
