@@ -42,48 +42,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
   if ($valid) {
     //Create connection
-    /*$con = mysqli_connect('localhost','root','');
-    if (!$con) {
-      die();
-    }*/
-    $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    $con = mysqli_connect('my-mysql','root','swiftwing');
     if (!$con) {
       die();
     }
+    /*$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    if (!$con) {
+      die();
+    }*/
     //Create database
     /*$sql = "CREATE DATABASE DSW";
       if (mysqli_query($con, $sql)) {
         echo 'Register created.';
     }*/
     //Select database
-    /*$select = mysqli_select_db($con, 'DSW');
+    $select = mysqli_select_db($con, 'DSW');
+    if (!$select)
+    {
+      die();
+    } else {
+      echo "Selected.";
+    }
+    /*$select = mysqli_select_db($con, '3670719_start');
     if (!$select)
     {
       die();
     } else {
       echo "Selected.";
     }*/
-    $select = mysqli_select_db($con, '3670719_start');
-    if (!$select)
-    {
-      die();
-    } else {
-      echo "Selected.";
-    }
     //Create table
-    $sql = "CREATE TABLE Register (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Username CHAR(20), Email CHAR(254), Password CHAR(128))";
+    /*$sql = "CREATE TABLE Register (Id INT AUTO_INCREMENT, PRIMARY KEY(Id), Username CHAR(20), Email CHAR(254), Password CHAR(128))";
     if (mysqli_query($con, $sql)) {
       echo "Created.";
-    }
+    }*/
     //Check for room in table and insert data
-    $rowcount = "SELECT COUNT(*) FROM Register";
+    $result = mysqli_query($con, "SELECT COUNT(*) AS total FROM Register");
+    $data = mysqli_fetch_assoc($result);
+    $rowcount = $data['total'];
     if ($rowcount < 101) {
       $sql = "INSERT INTO Register (Username, Email, Password) VALUES ('$user',  '$email', '$password')";
     }
     if (mysqli_query($con, $sql)) {
       echo "Data inserted.";
       mysqli_close($con);
-      header ('Location: http://amandapatschke.com/DSW/login.php');
+      header ('Location: http://localhost:8080/DSW/login.php');
       exit();
     }
   }

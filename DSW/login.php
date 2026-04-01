@@ -27,29 +27,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
   if ($valid) {
     //Create connection
-    /*$con = mysqli_connect('localhost','root','');
-    if (!$con) {
-      die();
-    }*/
-    $con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    $con = mysqli_connect('my-mysql','root','swiftwing');
     if (!$con) {
       die();
     }
+    /*$con = mysqli_connect('fdb29.awardspace.net','3670719_start','4)D/cWZn54[P;/J4');
+    if (!$con) {
+      die();
+    }*/
     //Select database
-    /*$select = mysqli_select_db($con, 'DSW');
-    if (!$select)
-    {
-      die();
-    } else {
-      echo "Selected.";
-    }*/
-    $select = mysqli_select_db($con, '3670719_start');
+    $select = mysqli_select_db($con, 'DSW');
     if (!$select)
     {
       die();
     } else {
       echo "Selected.";
     }
+    /*$select = mysqli_select_db($con, '3670719_start');
+    if (!$select)
+    {
+      die();
+    } else {
+      echo "Selected.";
+    }*/
     //Query Value
     $sql = "SELECT * FROM Register WHERE Username = '$user' AND Password = '$password'";
     $result = mysqli_query($con,$sql);
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['user'] = $user;
       $_SESSION['password'] = $password;
       mysqli_close($con);
-      header ('Location: http://amandapatschke.com/DSW/index.php');
+      header ('Location: http://localhost:8080/DSW/index.php');
       exit();
     } else {
       $userErr = "* Username not found";

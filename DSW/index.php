@@ -13,11 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Marcellus+SC&display=swap" rel="stylesheet"> 
     <link rel="icon" type="image/png" href="Images/dark_sign.png" sizes="72x72">
     <script src="https://kit.fontawesome.com/7171ae1460.js" crossorigin="anonymous"></script>
-    <script>
-      function destroySession() {
-        <?php session_destroy(); ?>
-      }
-    </script>
   </head>
   <body>
     <div id="container">
@@ -37,7 +32,7 @@
           ?></li>
           <li><?php
             if (isset($_SESSION['user'])) {
-              echo "<a href='index.php' onclick='destroySession();'>Logout</a>";
+              echo "<a href='logout.php'>Logout</a>";
             } else {
               echo "<a href='login.php'>Login</a>";
             }
